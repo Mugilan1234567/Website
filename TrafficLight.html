@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: grey;
+        }
+
+        #main {
+            height: 535px;
+            width: 200px;
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            border: 5px solid grey;
+            border-radius: 100px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .light {
+            height: 100px;
+            width: 100px;
+            border-radius: 100%;
+            background-color: grey;
+            border: 25px double black;
+            transition: transform 0.5s ease-in-out, background-color 0.75s ease-in-out;
+        }
+
+        .light.bounce {
+            animation: bounce 0.5s ease-in-out forwards;
+        }
+
+        .light.active {
+            box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.5);
+        }
+
+        #lawngreen.active {
+            background-color: lawngreen;
+        }
+
+        #gold.active {
+            background-color: gold;
+        }
+
+        #crimson.active {
+            background-color: crimson;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1.025);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="main" onclick="onClickLight(event)">
+        <span id="lawngreen" class="light"></span>
+        <span id="gold" class="light"></span>
+        <span id="crimson" class="light"></span>
+    </div>
+
+    <script>
+        function onClickLight(event) {
+            if (event.target.classList.contains('light')) {
+                onClearLights();
+                const clickedLight = document.getElementById(event.target.id);
+
+                // Restart animation and add active class
+                clickedLight.classList.remove('bounce', 'active');
+                void clickedLight.offsetWidth; // Trigger a reflow, flushing the CSS changes
+                clickedLight.classList.add('bounce', 'active');
+            }
+        }
+
+        function onClearLights() {
+            let lights = Array.from(document.getElementById('main').children);
+            lights.forEach(element => {
+                element.classList.remove('bounce', 'active');
+            });
+        }
+    </script>
+</body>
+</html>
