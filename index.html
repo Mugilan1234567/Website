@@ -1,49 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            text-align: center;
+            box-sizing: border-box;
         }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
         header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 1em 0;
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #1e1e1e;
+            position: relative;
+            overflow: hidden;
         }
+
+        header h1 {
+            font-size: 3em;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: .15em solid #1a78dd;
+            display: inline-block;
+            animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #1a78dd }
+        }
+
         section {
-            margin: 20px;
+            padding: 50px 20px;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-in-out;
         }
-        footer {
-            background-color: #f1f1f1;
-            padding: 1em 0;
+
+        section.about {
+            background-color: #2a2a2a;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-left: 5px solid #1a78dd;
+        }
+
+        section.projects {
+            background-color: #1e1e1e;
+            border-top: 5px solid #1a78dd;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .project {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-bottom: 3px solid #1a78dd;
+        }
+
+        .project:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .project img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        a.project {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        a.project h3 {
+            margin-top: 10px;
+            font-size: 1.5em;
+            color: #00ccff;
+        }
+
+        a.project:hover h3 {
+            color: #0099cc;
+        }
+
+        .project p {
+            margin-top: 5px;
+            font-size: 1em;
+            color: #bbbbbb;
+        }
+
+        .typing-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
+            max-width: 800px;
+            text-align: center;
+            border-left: 5px solid #1a78dd;
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            margin-bottom: 20px;
+        }
+
+        .accent {
+            position: absolute;
+            width: 10px;
+            height: 100%;
+            background-color: #1a78dd;
+            top: 0;
+        }
+
+        .accent-left {
+            left: 0;
+        }
+
+        .accent-right {
+            right: 0;
         }
     </style>
 </head>
 <body>
+    <div class="accent accent-left"></div>
+    <div class="accent accent-right"></div>
     <header>
-        <h1>My Portfolio</h1>
+        <div class="typing-container">
+            <h1 id="typed-text"></h1>
+        </div>
     </header>
-    <section>
+
+    <section class="about">
         <h2>About Me</h2>
-        <p>Hello! I am a high school student learning web development and looking to learn even more things.</p>
+        <p>Hello! I'm Mugilan Chinnapparajan, a passionate developer with experience in programming. I have been programming from a young age, and I have loved it ever since. Come check out some of the projects I have done in this Internship!</p>
     </section>
-    <section>
+
+    <section class="projects">
         <h2>Projects</h2>
-        <ul>
-            <li>Project 1</li>
-            <li>Project 2</li>
-            <li>Project 3</li>
-            <li>Project 4</li>
-        </ul>
+        <div class="grid">
+            <a href="TrafficLight.html" target="_blank" class="project">
+                <img src="file:///C:/Users/mugil/OneDrive/Pictures/Screenshots/Screenshot%202024-06-26%20155841.png" alt="Project 1">
+                <h3>Day 1: Traffic Light</h3>
+                <p>Traffic Light that responds to a mouse click.</p>
+            </a>
+
+            <a href="Form.html" target="_blank" class="project">
+                <img src="file:///C:/Users/mugil/OneDrive/Pictures/Screenshots/Screenshot%202024-06-26%20182511.png" alt="Project 2">
+                <h3>Day 1: Registration Form</h3>
+                <p>Simple Registration Form that asks for Username and Password. Includes a validation check to ensure passwords are identical.</p>
+            </a>
+
+            <a href="https://public.tableau.com/app/profile/mugilan.chinnapparajan/viz/MiracleSoftInternshipDataRepresentation/Dashboard1" target="_blank" class="project">
+                <img src="file:///C:/Users/mugil/OneDrive/Pictures/Screenshots/Screenshot%202024-06-26%20181241.png" alt="Project 3">
+                <h3>Day 3: Tableau Representation of Data</h3>
+                <p>Designed Graphs to visually represent sales of a supermarket by City, Category of Products, and Products Themselves</p>
+            </a>
+
+            <a href="https://mugilancrajan.atlassian.net/jira/software/projects/MI/boards/2" target="_blank" class="project">
+                <img src="file:///C:/Users/mugil/OneDrive/Pictures/Screenshots/Screenshot%202024-06-26%20185447.png" alt="Project 4">
+                <h3>Day 3: Project Management Using Jira</h3>
+                <p>Planned and Updated tasks and issues on Jira to help streamline the process of creating this Project</p>
+            </a>
+            <!-- Add more projects as needed -->
+        </div>
     </section>
-    <footer>
-        <p>Contact: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
-    </footer>
+
+    <section class="contact">
+        <h2>Contact Me</h2>
+        <p>If you'd like to get in touch, please use the information below:</p>
+        <p>Email: mugilan@example.com</p>
+        <p>Phone: (123) 456-7890</p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/mugilan-chinnapparajan" target="_blank" style="color: #00ccff;">linkedin.com/in/mugilan-chinnapparajan</a></p>
+    </section>
+
+    <script>
+        const phrases = ["Mugilan Chinnapparajan", "Student", "Developer", "Learner", "Welcome to My Portfolio", "Check Out My Projects"];
+        let currentPhraseIndex = 0;
+        let currentLetterIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 100;
+        const deletingSpeed = 50;
+        const delayBetweenPhrases = 1500;
+        const typedText = document.getElementById('typed-text');
+
+        function type() {
+            const currentPhrase = phrases[currentPhraseIndex];
+            if (isDeleting) {
+                typedText.textContent = currentPhrase.substring(0, currentLetterIndex - 1);
+                currentLetterIndex--;
+                if (currentLetterIndex === 0) {
+                    isDeleting = false;
+                    currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+                    setTimeout(type, typingSpeed);
+                } else {
+                    setTimeout(type, deletingSpeed);
+                }
+            } else {
+                typedText.textContent = currentPhrase.substring(0, currentLetterIndex + 1);
+                currentLetterIndex++;
+                if (currentLetterIndex === currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(type, delayBetweenPhrases);
+                } else {
+                    setTimeout(type, typingSpeed);
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(type, typingSpeed);
+        });
+    </script>
 </body>
 </html>
