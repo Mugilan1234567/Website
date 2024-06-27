@@ -1,0 +1,185 @@
+<html>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #555;
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            position: relative;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -15px;
+            margin-bottom: 10px;
+        }
+        .highlight-error {
+            border-color: red;
+        }
+        .success {
+            color: #fff;
+            background-color: #28a745;
+            font-size: 16px;
+            margin-top: 10px;
+            align-self: center;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .strength {
+            margin-top: -15px;
+            margin-bottom: 10px;
+        }
+        .strength span {
+            font-size: 14px;
+            padding: 3px 5px;
+            border-radius: 3px;
+        }
+        .strength .weak {
+            color: #e74c3c;
+        }
+        .strength .medium {
+            color: #f39c12;
+        }
+        .strength .strong {
+            color: #2ecc71;
+        }
+    </style>
+    <div class="container">
+        <h1>Registration Form</h1>
+        <form onsubmit="return validateForm(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <div class="strength" id="strength"></div>
+
+            <label for="confirmpassword">Confirm Password:</label>
+            <input type="password" id="confirmpassword" name="confirmpassword" required>
+            
+            <div id="error-message" class="error"></div>
+            
+            <input type="submit" value="Submit">
+            <div class="loading-spinner" id="loading-spinner"></div>
+            
+            <div id="success-message" class="success"></div>
+        </form>
+    </div>
+</html>
+
+<script>
+    function validateForm(event) {
+        event.preventDefault();
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmpassword").value;
+        var email = document.getElementById("email").value;
+        var errorMessage = document.getElementById("error-message");
+        var passwordField = document.getElementById("password");
+        var confirmPasswordField = document.getElementById("confirmpassword");
+        var successMessage = document.getElementById("success-message");
+        var loadingSpinner = document.getElementById("loading-spinner");
+
+        if (!validateEmail(email)) {
+            errorMessage.innerText = "Please enter a valid email address!";
+            return false;
+        }
+
+        if (password != confirmPassword) {
+            errorMessage.innerText = "Passwords do not match!";
+            passwordField.classList.add("highlight-error");
+            confirmPasswordField.classList.add("highlight-error");
+            successMessage.innerText = "";
+        } else {
+            errorMessage.innerText = "";
+            passwordField.classList.remove("highlight-error");
+            confirmPasswordField.classList.remove("highlight-error");
+            successMessage.innerText = "";
+            successMessage.style.display = "none";
+            loadingSpinner.style.display = "inline-block";
+            setTimeout(() => {
+                loadingSpinner.style.display = "none";
+                successMessage.innerText = "Form Submitted!";
+                successMessage.style.display = "block";
+            }, 2000);
+        }
+    }
+
+    function validateEmail(email) {
+        var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        return re.test(email);
+    }
+
+    document.getElementById('password').addEventListener('input', function() {
+        var strength = document.getElementById('strength');
+        var password = this.value;
+        if (password.length < 6) {
+            strength.innerHTML = '<span class="weak">Weak</span>';
+        } else if (password.length < 10) {
+            strength.innerHTML = '<span class="medium">Medium</span>';
+        } else {
+            strength.innerHTML = '<span class="strong">Strong</span>';
+        }
+    });
+</script>
